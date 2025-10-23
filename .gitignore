@@ -13,3 +13,6 @@ dist/
 #.env.*
 .idea/
 .vscode/
+docs/md/
+docs/assets/
+
