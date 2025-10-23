@@ -1,0 +1,15 @@
+# Entorno virtual y caches
+.venv/
+__pycache__/
+*.pyc
+
+# Archivos generados
+*.pdf
+build/
+dist/
+
+# Configuración local
+.env
+.env.*
+.idea/
+.vscode/
