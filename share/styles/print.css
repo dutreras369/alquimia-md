@@ -1,27 +1,101 @@
-/* docs/styles/print.css (versión sin @font-face) */
+/* print.css — v3 WeasyPrint-safe */
 :root{
-  --accent-1:#E40035; --accent-4:#DC087D; --accent-6:#6C00F5;
-  --ink:#1f1f1f; --muted:#6b7280; --border:#e5e7eb;
+  --accent-1:#E40035;  /* magenta rojo */
+  --accent-4:#DC087D;  /* fucsia */
+  --accent-6:#6C00F5;  /* violeta */
+  --ink:#1f1f1f;
+  --muted:#6b7280;
+  --border:#e5e7eb;
 }
+
 @page { size: A4; margin: 2cm; }
-html, body {
-  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  color: var(--ink); line-height: 1.45;
+
+html, body{
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", Arial, sans-serif;
+  color: var(--ink);
+  line-height: 1.45;
 }
-h1{ font-size: 2rem; font-weight: 800;
-  background: linear-gradient(90deg, var(--accent-1), var(--accent-4), var(--accent-6));
-  -webkit-background-clip: text; background-clip: text; color: transparent;
+
+/* ===== TÍTULOS EN BLANCO CON FONDO DEGRADADO (compatible impresión) ===== */
+h1, h2{
+  margin:0;
+  line-height: 1.2;
+  font-weight: 800;
+  color: #6C00F5; 
+  border-radius: 6px;
+  break-after: avoid;
 }
-h2{ font-size: 1.5rem; color: var(--accent-6); font-weight: 700; }
-h3{ font-size: 1.25rem; color: var(--accent-4); font-weight: 700; }
+h1{ font-size: 1.9rem; }
+h2{ font-size: 1.5rem; }
+h3{ margin: .9em 0 .45em; font-size: 1.25rem; font-weight: 700; color: #4f46e5; break-after: avoid; }
+
 p, li { font-size: 11.5pt; }
-code, pre{ font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 10pt; }
-table{ border-collapse: collapse; width: 100%; margin: 1em 0; font-size: 10.5pt; }
+ul, ol { padding-left: 1.2em; }
+
+/* ===== DIAGRAMAS Mermaid ===== */
+.mermaid-diagram{
+  margin: .4em 0 1em;
+  break-before: avoid;     /* intenta no saltar de página antes */
+  break-inside: avoid;     /* y no partir el bloque */
+}
+
+/* Escala respetando aspecto: cabe por ancho y por alto de la caja de contenido */
+.mermaid-diagram img{
+  display: block;
+  width: auto;             /* dejamos que se calcule con natural width */
+  max-width: 100%;         /* nunca rebase el ancho de la página */
+  height: auto;            /* mantiene aspecto */
+  max-height: 24cm;        /* ⚑ clave: fuerza a que el alto quepa en A4 (2cm márgenes) */
+  margin: 0;
+  page-break-inside: avoid;
+}
+
+/* ===== Code / Pre ===== */
+code, pre{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 10pt;
+}
+pre{
+  padding: .8em;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fafafa;
+  /* sin overflow-x:auto (Weasy no lo soporta) */
+}
+
+/* ===== Tablas ===== */
+table{
+  border-collapse: collapse; width: 100%; margin: 1em 0; font-size: 10.5pt;
+}
 th, td{ padding: .6em .7em; border: 1px solid var(--border); }
 th{ text-align: left; background: #fbfbff; color: var(--accent-6); font-weight: 700; }
-img{ max-width: 100%; display: block; margin: 1em auto; }
-.page-break{ page-break-before: always; }
-/* refuerzo mermaid */
-.mermaid svg .node rect, .mermaid svg .cluster rect{ stroke: var(--accent-6) !important; }
-.mermaid svg .edgePath path{ stroke: var(--accent-4) !important; }
-.mermaid svg .label, .mermaid svg text{ fill: var(--ink) !important; font-family: "Inter", sans-serif !important; }
+
+h2{
+    margin: 0.6em 0 0.25em;
+    line-height: 1.2;
+    font-weight: 800;
+    color: #fff;
+    padding: .28em .6em;
+    border-radius: 6px;
+    background: linear-gradient(90deg, #f59fb3, #d79be6, #b0a9ff);
+    break-after: avoid;
+  }
+
+/* El P que envuelve la imagen del diagrama (lo marcamos desde el filtro) */
+/* Contenedor del diagrama (lo marca el filtro) */
+p.diagram-block{
+  margin: 0.12em 0 0.8em;   /* pegadito al título */
+  break-before: avoid;
+  break-inside: avoid;
+}
+
+/* La propia imagen del diagrama */
+img.mermaid-diagram{
+  display: block;
+  max-width: 100%;
+  height: auto;
+  max-height: 24cm;
+  margin: 0;
+  page-break-inside: avoid;
+}
+
