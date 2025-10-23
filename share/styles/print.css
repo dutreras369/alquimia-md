@@ -1,0 +1,27 @@
+/* docs/styles/print.css (versión sin @font-face) */
+:root{
+  --accent-1:#E40035; --accent-4:#DC087D; --accent-6:#6C00F5;
+  --ink:#1f1f1f; --muted:#6b7280; --border:#e5e7eb;
+}
+@page { size: A4; margin: 2cm; }
+html, body {
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color: var(--ink); line-height: 1.45;
+}
+h1{ font-size: 2rem; font-weight: 800;
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-4), var(--accent-6));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+h2{ font-size: 1.5rem; color: var(--accent-6); font-weight: 700; }
+h3{ font-size: 1.25rem; color: var(--accent-4); font-weight: 700; }
+p, li { font-size: 11.5pt; }
+code, pre{ font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 10pt; }
+table{ border-collapse: collapse; width: 100%; margin: 1em 0; font-size: 10.5pt; }
+th, td{ padding: .6em .7em; border: 1px solid var(--border); }
+th{ text-align: left; background: #fbfbff; color: var(--accent-6); font-weight: 700; }
+img{ max-width: 100%; display: block; margin: 1em auto; }
+.page-break{ page-break-before: always; }
+/* refuerzo mermaid */
+.mermaid svg .node rect, .mermaid svg .cluster rect{ stroke: var(--accent-6) !important; }
+.mermaid svg .edgePath path{ stroke: var(--accent-4) !important; }
+.mermaid svg .label, .mermaid svg text{ fill: var(--ink) !important; font-family: "Inter", sans-serif !important; }
